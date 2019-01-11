@@ -41,13 +41,26 @@ void TerminalRenderThread::send_data(Ui::MainWindow *ui)
     port.send_data(ui->send_input->text().toStdString());
 }
 
-void TerminalRenderThread::send_calibration_data()
+void TerminalRenderThread::send_calibration_data_led()
 {
-    port.send_data("test --adjust_led 100 95 90");
+    port.send_data("test --adjust_led 100 100 100");
+}
+
+void TerminalRenderThread::send_calibration_data_3v()
+{
     port.send_data("test --battery 3000");
+}
+
+void TerminalRenderThread::send_calibration_data_2v()
+{
     port.send_data("test --battery 2000");
+}
+
+void TerminalRenderThread::send_calibration_data_commit()
+{
     port.send_data("test --commit_cal");
 }
+
 
 void TerminalRenderThread::port_connect(Ui::MainWindow *ui)
 {
@@ -57,7 +70,10 @@ void TerminalRenderThread::port_connect(Ui::MainWindow *ui)
     {
         port.close_port();
         ui->button_send->setEnabled(0);
-        ui->button_calibrate->setEnabled(0);
+        ui->button_calib_led->setEnabled(0);
+        ui->button_calib_2V->setEnabled(0);
+        ui->button_calib_3V->setEnabled(0);
+        ui->button_calib_commit->setEnabled(0);
         ui->button_connect->setText("Connect");
     }
     else
@@ -66,7 +82,10 @@ void TerminalRenderThread::port_connect(Ui::MainWindow *ui)
         {
             ui->button_connect->setText("Disconnect");
             ui->button_send->setEnabled(1);
-            ui->button_calibrate->setEnabled(1);
+            ui->button_calib_led->setEnabled(1);
+            ui->button_calib_2V->setEnabled(1);
+            ui->button_calib_3V->setEnabled(1);
+            ui->button_calib_commit->setEnabled(1);
         }
         else
         {
@@ -90,7 +109,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->button_catch, SIGNAL(clicked()), SLOT(catch_pressed()));
     connect(ui->button_clear_history, SIGNAL(clicked()), SLOT(clear_history()));
     connect(ui->button_send, SIGNAL(clicked()), SLOT(send()));
-    connect(ui->button_calibrate, SIGNAL(clicked()), SLOT(calibrate()));
+    connect(ui->button_calib_led, SIGNAL(clicked()), SLOT(calibrate_led()));
+    connect(ui->button_calib_2V, SIGNAL(clicked()), SLOT(calibrate_2v()));
+    connect(ui->button_calib_3V, SIGNAL(clicked()), SLOT(calibrate_3v()));
+    connect(ui->button_calib_commit, SIGNAL(clicked()), SLOT(commit_calibration()));
     connect(&receive_thread, SIGNAL(received_data(string)), SLOT(update_data(string)));
 
     QStringList baudrates = {
@@ -268,7 +290,22 @@ void MainWindow::send()
     receive_thread.send_data(ui);
 }
 
-void MainWindow::calibrate()
+void MainWindow::calibrate_led()
 {
-    receive_thread.send_calibration_data();
+    receive_thread.send_calibration_data_led();
+}
+
+void MainWindow::calibrate_3v()
+{
+    receive_thread.send_calibration_data_3v();
+}
+
+void MainWindow::calibrate_2v()
+{
+    receive_thread.send_calibration_data_2v();
+}
+
+void MainWindow::commit_calibration()
+{
+    receive_thread.send_calibration_data_commit();
 }

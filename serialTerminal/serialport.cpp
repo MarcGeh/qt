@@ -131,6 +131,19 @@ string SerialPort::read_data()
 
 void SerialPort::send_data(string data)
 {
-    data += "\r\n";
-    write(port, data.c_str(), data.length());
+    char d[2];
+    d[1] = '\0';
+    for(unsigned long i = 0; i < data.length(); i++)
+    {
+        d[0] = data.c_str()[i];
+        write(port, d, 1);
+        usleep(1000);
+    }
+
+    d[0] = '\r';
+    write(port, d, 1);
+    usleep(1000);
+    d[0] = '\n';
+    write(port, d, 1);
+    usleep(10000);
 }

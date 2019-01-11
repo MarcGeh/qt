@@ -23,7 +23,10 @@ public:
     void render();
     void port_connect(Ui::MainWindow *ui);
     void send_data(Ui::MainWindow *ui);
-    void send_calibration_data();
+    void send_calibration_data_led();
+    void send_calibration_data_3v();
+    void send_calibration_data_2v();
+    void send_calibration_data_commit();
 
 protected:
     void run() override;
@@ -58,7 +61,10 @@ private slots:
     void catch_pressed();
     void clear_history();
     void send();
-    void calibrate();
+    void calibrate_led();
+    void calibrate_3v();
+    void calibrate_2v();
+    void commit_calibration();
 };
 
 #endif // MAINWINDOW_H

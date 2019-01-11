@@ -64,16 +64,6 @@
               </property>
              </widget>
             </item>
-            <item>
-             <widget class="QPushButton" name="button_calibrate">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>Calibrate</string>
-              </property>
-             </widget>
-            </item>
            </layout>
           </item>
           <item>
@@ -82,6 +72,46 @@
              <widget class="QPushButton" name="button_clear_history">
               <property name="text">
                <string>Clear History</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_calib_led">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Calibrate LED</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_calib_3V">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Calibrate 3V</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_calib_2V">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Calibrate 2V</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_calib_commit">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Commit Calibration</string>
               </property>
              </widget>
             </item>
@@ -171,7 +201,7 @@
      <x>0</x>
      <y>0</y>
      <width>1146</width>
-     <height>19</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
