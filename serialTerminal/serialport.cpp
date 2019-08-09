@@ -27,18 +27,19 @@ vector<string> SerialPort::list_all_ports()
             close(fd);
         }
     }
-    /*for(int i = 0; i < 256; i++)
+    for(int i = 0; i < 256; i++)
     {
         port.clear();
-        port.append("/dev/ttyS");
+        port.append("/dev/ttyACM");
         port.append(to_string(i));
         fd = open(port.c_str(), O_RDWR);
         if(fd != -1)
         {
             list.push_back(port);
+            cout << "Found: " << port << endl;
             close(fd);
         }
-    }*/
+    }
     return list;
 }
 
